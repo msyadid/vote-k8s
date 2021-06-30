@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: result
+  name: result
+  namespace: vote
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: result
+  template:
+    metadata:
+      labels:
+        app: result
+    spec:
+      containers:
+      - name: result
+        image: dockersamples/examplevotingapp_result:before
+        ports:
+        - containerPort: 80
+          name: result
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: result
+  name: result
+  namespace: vote
+spec:
+  type: NodePort
+  ports:
+  - name: "result-service"
+    port: 5001
+    targetPort: 80
+    nodePort: 32000
+  selector:
+    app: result

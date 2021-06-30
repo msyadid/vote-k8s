@@ -35,6 +35,6 @@ spec:
   type: NodePort
   ports:
   - name: "vote-service"
-    port: 5000
-    targetPort: 80
-    nodePort: 31000    
+    port: 5000 #ini port service
+    targetPort: 80 #ini port container dari docker image, pastikan di dockerfile port yg diexpose sama dengan ini
+    nodePort: 31000 #ini port yg digunakan untuk akses dari luar dengan ip node (lihat di ipconfig to get WSL IP)   
